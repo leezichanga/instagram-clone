@@ -109,3 +109,17 @@ def new_comment(request,pk):
         form = CommentForm()
     return render(request, 'comment.html', {"user":current_user,
                                             "comment_form":form})
+
+@login_required(login_url="/accounts/login/")
+def view_your_profile(request,pk):
+    title =  "Insta-gram"
+    current_user = request.user
+    image = Image.get_images()
+    profile = Profile.get_profile()
+    comment = Comment.get_comment()
+    user = get_object_or_404(User, pk=pk)
+    return render(request,'profile/view.html',{"user":current_user,
+                                               "images":image,
+                                               "my_user":user,
+                                               "comments":comment,
+                                               "profile":profile})
