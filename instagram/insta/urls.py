@@ -8,4 +8,8 @@ urlpatterns=[
     url(r'^profile/',views.profile, name='profile'),
     url(r'^settings/',views.settings,name='settings'),
     url(r'^edit/',views.edit,name='edit'),
+    url(r'^upload_image/',views.upload,name='upload'),
+    url(r'^search/',views.search_results,name='search'),
+    url(r'^comment/(?P<pk>\d+)',views.new_comment,name='comment'),
+    url(r'^view_profile/(?P<pk>\d+)',views.view_your_profile,name='yourprofile'),
     ]
