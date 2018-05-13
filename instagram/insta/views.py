@@ -29,3 +29,26 @@ def profile(request):
                                                   "image":image,
                                                   "user":current_user,
                                                   "profile":profile,})
+
+@login_required(login_url='/accounts/login/')
+def settings(request):
+    title = 'Insta-Gram'
+    settings = Profile.get_profile()
+    return render(request,'profile/settings.html',{"settings":settings,
+                                                    "title":title,})
+
+@login_required(login_url='/accounts/login/')
+def edit(request):
+    title = 'Insta-Gram'
+    current_user = request.user
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST,request.FILES)
+        if form.is_valid():
+            update = form.save(commit=False)
+            update.user = current_user
+            update.save()
+            return redirect('profile')
+    else:
+        form = EditProfileForm()
+    return render(request,'profile/edit.html',{"title":title,
+                                                "form":form})
