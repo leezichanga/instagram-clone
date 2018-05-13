@@ -52,3 +52,24 @@ def edit(request):
         form = EditProfileForm()
     return render(request,'profile/edit.html',{"title":title,
                                                 "form":form})
+
+@login_required(login_url="/accounts/login/")
+def upload(request):
+    title = 'Insta-Gram'
+    current_user = request.user
+    profiles = Profile.get_profile()
+    for profile in profiles:
+        if profile.user.id == current_user.id:
+            if request.method == 'POST':
+                form = UploadForm(request.POST,request.FILES)
+                if form.is_valid():
+                    upload = form.save(commit=False)
+                    upload.user = current_user
+                    upload.profile = profile
+                    upload.save()
+                    return redirect('home')
+            else:
+                form = UploadForm()
+            return render(request,'upload/new.html',{"title":title,
+                                                    "user":current_user,
+                                                    "form":form})
