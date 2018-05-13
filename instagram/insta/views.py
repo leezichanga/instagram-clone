@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse,Http404
 from .models import Image,Profile,Comment
 from django.contrib.auth.models import User
+from .forms import EditProfileForm,UploadForm,CommentForm
 
 # Create your views here.
 @login_required(login_url='/accounts/login/')
