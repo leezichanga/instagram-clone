@@ -55,6 +55,7 @@ def edit(request):
     return render(request,'profile/edit.html',{"title":title,
                                                 "form":form})
 
+
 @login_required(login_url="/accounts/login/")
 def upload(request):
     title = 'Insta-Gram'
@@ -124,3 +125,15 @@ def view_your_profile(request,pk):
                                                "my_user":user,
                                                "comments":comment,
                                                "profile":profile})
+
+
+@login_required(login_url="/accounts/login/")
+def like(request,operation,pk):
+    image = get_object_or_404(Image,pk=pk)
+    if operation == 'like':
+        image.likes += 1
+        image.save()
+    elif operation =='unlike':
+        image.likes -= 1
+        image.save()
+    return redirect('home')
