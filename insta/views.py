@@ -4,7 +4,7 @@ from django.http import HttpResponse,Http404
 from .models import Image,Profile,Comment
 from django.contrib.auth.models import User
 from .forms import EditProfileForm,UploadForm,CommentForm
-from .email import send_welcome_email
+# from .email import send_welcome_email
 
 # Create your views here.
 @login_required(login_url='/accounts/login/')
