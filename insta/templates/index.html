@@ -5,7 +5,8 @@
     <div class="col-md-2 col-lg-2 col-xs-1 col-sm-1"></div>
 
     <div class="col-md-8 col-lg-8 col-xs-9 col-sm-9">
-      <p>Hi <b>{{user | title}}</b> Do you have a profile? <a href="{% url 'edit' %}" class="btn btn-primary">Create Profile</a></p>
+      <p>Hi <b>{{user | title}}</b>
+        <br> Do you have a profile? <a href="{% url 'edit' %}" class="btn btn-primary">Create Profile</a></p>
       {% for img in images %} {% if img.image %}
       <div class="card">
         <div class="card-header">
